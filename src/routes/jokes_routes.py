@@ -1,0 +1,106 @@
+from typing import Annotated
+
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import Path
+from fastapi import status
+from sqlalchemy.orm import Session
+
+from src.dependencies import get_db
+from src.db.schemas import JokeBase
+# from src.db.schemas import JokeWithID
+from src.enums import JokeType
+from src.logger import log
+from src.services.jokes_service import JokesService
+
+
+jokes_routes = APIRouter(
+    prefix="/jokes",
+    tags=["jokes"]
+)
+
+
+@jokes_routes.get("/", status_code=status.HTTP_200_OK)
+async def get_random_joke():
+    """
+    Get a random joke.
+    """
+    try:
+        return await JokesService().get_joke()
+    except Exception as e:
+        log.error(f"Error detail: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={f"Error detail: {e}"},
+        )
+
+
+@jokes_routes.get("/{joke_source}", status_code=status.HTTP_200_OK)
+async def get_joke_from_source(joke_source: Annotated[
+        JokeType, Path(
+            title="Joke source",
+            description="The source where the joke comes from"
+        )
+]):
+    """
+    Get a joke from one of our third party providers
+    (chuck & dads at the moment)!
+    """
+    try:
+        return await JokesService().get_joke(joke_source)
+    except Exception as e:
+        log.error(f"Error detail: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={f"Error detail: {e}"}
+        )
+
+
+@jokes_routes.post("/", status_code=status.HTTP_200_OK)
+async def create_joke(joke: JokeBase, db: Session = Depends(get_db)):
+    """
+    Stores a joke in the db
+    """
+    try:
+        return await JokesService().create_joke(db, joke)
+    except Exception as e:
+        log.error(f"Error detail: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={f"Error detail: {e}"}
+        )
+
+
+@jokes_routes.put("/jokes/{joke_id}")
+async def update_joke(
+    joke_id: int, joke: JokeBase, db: Session = Depends(get_db)
+):
+    """
+    Updates a joke in the db
+    """
+    try:
+        return await JokesService().update_joke(db, joke_id, joke)
+    except Exception as e:
+        log.error(f"Error detail: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={f"Error detail: {e}"}
+        )
+
+
+@jokes_routes.delete("/jokes/{joke_id}")
+async def delete_joke(
+    joke_id: int, db: Session = Depends(get_db)
+):
+    """
+    Deletes a joke from the db
+    """
+    try:
+        return await JokesService().delete_joke(db, joke_id)
+    except Exception as e:
+        log.error(f"Error detail: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={f"Error detail: {e}"}
+        )

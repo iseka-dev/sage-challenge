@@ -1,0 +1,2 @@
+class JokeNotFoundException(Exception):
+    pass
