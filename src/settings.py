@@ -5,7 +5,7 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    load_dotenv()
+    load_dotenv(".env")
 
     PROJECT_NAME = os.getenv("PROJECT_NAME", "")
     MONGO_URL = os.getenv("MONGO_URL", "")
