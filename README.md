@@ -7,9 +7,13 @@ This project is part of the Sage Makers Challenge.
 ###### MAIN ROUTES
 
 1.a GET  /jokes/
+
 1.b GET  /jokes/{joke_source}
+
 1.c POST /jokes/
+
 1.d PUT /jokes/{joke_id}
+
 1.e DELETE /jokes/{joke_id}
 
 2.a GET /nums/lcm/
