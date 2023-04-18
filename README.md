@@ -20,7 +20,7 @@ This project is part of the Sage Makers Challenge.
 2. b GET /nums/next/
 
 To interact and see more details about this endpoints (what can be done with them and which are their query and body params), 
-please go to the docs section at http://{...}/docs.
+please go to the docs section at the endpoint /docs.
 
 
 ###### SET UP the project
