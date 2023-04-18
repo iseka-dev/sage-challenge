@@ -40,6 +40,7 @@ There are two ways to run the project in order to be able to use this api.
       let the project initialize, while the second connects with the Mongo DB (invited user credentials provided).
       
       PROJECT_NAME = "SageMakersChallenge"
+      
       MONGO_URL = "mongodb+srv://invited:pJuCaIBrq7TeqXTL@clusterh.338j7rl.mongodb.net/?retryWrites=true&w=majority"
       
    d. Run uvicorn in the console with the following command:
@@ -51,9 +52,11 @@ There are two ways to run the project in order to be able to use this api.
      
 2. It is also possible to run the project with Docker.
    
-   a. Download the image from docker hub: ``` docker pull horaciochiarella/sage-challenge:latest ````
+   a. Download the image from docker hub: 
+   ``` docker pull horaciochiarella/sage-challenge:latest ```
    
-   b. Execute the image with ``` docker run -d --name mycontainer -p 80:80 horaciochiarella/sage-challenge ```
+   b. Execute the image with 
+   ``` docker run -d --name mycontainer -p 80:80 horaciochiarella/sage-challenge ```
   
 
 #### What else?
