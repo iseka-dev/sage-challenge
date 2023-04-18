@@ -9,10 +9,9 @@ from sqlalchemy.orm import Session
 
 from src.dependencies import get_db
 from src.db.schemas import JokeBase
-# from src.db.schemas import JokeWithID
 from src.enums import JokeType
 from src.logger import log
-from src.services.jokes_service import JokesService
+from src.services.jokes_services import JokesService
 
 
 jokes_routes = APIRouter(

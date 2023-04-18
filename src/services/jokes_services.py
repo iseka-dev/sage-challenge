@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from src.db.schemas import JokeBase
 from src.enums import JokeType
 from src.exceptions import JokeNotFoundException
-# from src.logger import log
+from src.logger import log
 from src.repositories import jokes_repo
 
 
@@ -22,19 +22,21 @@ class JokesService:
 
     async def create_joke(self, db: Session, joke: JokeBase):
         return await jokes_repo.create_joke(db, joke)
-    
-    async def get_by_id(self, id: int):
-        user = await jokes_repo.get_by_id(id)
-        if user is None:
-            raise JokeNotFoundException(f"User '{id}' not found.")
+
+    async def get_by_id(self, db: Session, id: int):
+        joke = await jokes_repo.get_by_id(db, id)
+        if joke is None:
+            raise JokeNotFoundException(f"Joke '{id}' not found.")
+        return joke
 
     async def update_joke(
         self, db: Session, joke_id: int, joke: JokeBase
     ):
-        joke = self.get_by_id(joke_id)
-        return await jokes_repo.update_joke(db, joke_id, joke)
+        update_joke = jokes_repo.update_joke(db, joke_id, joke)
+        return {"updated_joke": update_joke}
 
     async def delete_joke(
         self, db: Session, joke_id: int
     ):
-        return await jokes_repo.delete_joke(db, joke_id)
+        deleted_joke = jokes_repo.delete_joke(db, joke_id)
+        return {"deleted_joke": deleted_joke}
