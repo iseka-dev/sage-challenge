@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import HTTPException
 from fastapi import Path
+from fastapi import Request
 from fastapi import status
 from sqlalchemy.orm import Session
 
@@ -57,11 +58,12 @@ async def get_joke_from_source(joke_source: Annotated[
 
 
 @jokes_routes.post("/", status_code=status.HTTP_200_OK)
-async def create_joke(joke: JokeBase, db: Session = Depends(get_db)):
+async def create_joke(request: Request, joke: JokeBase, db: Session = Depends(get_db)):
     """
     Stores a joke in the db
     """
     try:
+        await JokesService().create_mongo_joke(request, joke)
         return await JokesService().create_joke(db, joke)
     except Exception as e:
         log.error(f"Error detail: {e}")
@@ -97,6 +99,21 @@ async def delete_joke(
     """
     try:
         return await JokesService().delete_joke(db, joke_id)
+    except Exception as e:
+        log.error(f"Error detail: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={f"Error detail: {e}"}
+        )
+
+
+@jokes_routes.post("/mongo", status_code=status.HTTP_200_OK)
+async def create_mongo_joke(request: Request, joke: JokeBase):
+    """
+    Stores a joke in the db
+    """
+    try:
+        return await JokesService().create_mongo_joke(request, joke)
     except Exception as e:
         log.error(f"Error detail: {e}")
         raise HTTPException(
