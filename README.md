@@ -4,7 +4,7 @@
 This project is part of the Sage Makers Challenge.
 
 
-#### MAIN ROUTES
+### MAIN ROUTES
 
 1.a GET  /jokes/
 
@@ -23,7 +23,7 @@ To interact and see more details about this endpoints (what can be done with the
 please go to the docs section at the endpoint /docs.
 
 
-#### SET UP the project
+### SET UP the project
 
 There are two ways to run the project in order to be able to use this api.
 
@@ -59,13 +59,13 @@ There are two ways to run the project in order to be able to use this api.
    ``` docker run -d --name mycontainer -p 80:80 horaciochiarella/sage-challenge ```
   
 
-#### What else?
+### What else?
 
 There are many features that could be implemented and that would improve the project in a very significative way. 
 Next I summarize a list with the most important ones:
 
 
-#### Tests Suite
+### Tests Suite
 
 The nest big step would be to have all this endpoints, services and queries tested.
 - Unit tests to test Routes, helpers and well some services.
@@ -74,7 +74,7 @@ The nest big step would be to have all this endpoints, services and queries test
 It could be used pytest library to execute the tests, and coverage library to know how much of our code is test covered.
 
 
-#### Endpoints & Routes
+### Endpoints & Routes
 
 - The endpoints that get jokes about chuck norris and dads could be improved to use all the functionalities that this third party apis offer
   (like searching by category or by text).
@@ -83,7 +83,7 @@ It could be used pytest library to execute the tests, and coverage library to kn
 - More exceptions could be catched, and more personalized messages could be offered for some errors. 
 
 
-#### Databases
+### Databases
 
 - The sqlite database should be improved to a postgress version.
 - Ids in sqlite could be managed with UUID library in postgres.
@@ -91,6 +91,9 @@ It could be used pytest library to execute the tests, and coverage library to kn
   the joke table. For instance, there is no check to know the joke is repeated, so the same joke can be stored many many many times 
   ('till is not funny anymore!)
 - Bulk Operations could be added, as far as only is possible to work with one object at the moment.
+- With SQLlite a new instance is deployed when executing the project and stored in a .db file in the root folder.
+- With Mongo I took a different approach, and the connection connects with a personal collection stored in AWS through Mongo Atlas.
+
 
 
 As it is clear there are many improvement opportunitites. But the implementation is enough to show how many things can be done in so many different ways.
