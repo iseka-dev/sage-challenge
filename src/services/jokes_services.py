@@ -1,5 +1,6 @@
 import random
 
+from fastapi import Request
 from sqlalchemy.orm import Session
 # from src.enums import JokeType
 # from src.helpers import jokes_helpers
@@ -40,3 +41,17 @@ class JokesService:
     ):
         deleted_joke = jokes_repo.delete_joke(db, joke_id)
         return {"deleted_joke": deleted_joke}
+    
+    async def create_mongo_joke(self, request: Request, joke: JokeBase):
+        return await jokes_repo.create_mongo_joke(request, joke)
+    
+    async def update_mongo_joke(
+        self, request: Request, id: str, joke: JokeBase
+    ):
+        return await jokes_repo.update_mongo_joke(request, id, joke)
+
+    async def delete_mongo_joke(
+        self, request: Request, id: str
+    ):
+        return await jokes_repo.delete_mongo_joke(request, id)
+        
