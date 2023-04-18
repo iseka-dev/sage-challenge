@@ -24,9 +24,8 @@ def on_startup():
 async def startup_event():
     app.mongodb_client = pymongo.MongoClient(settings.MONGO_URL)
     app.mongo_database = app.mongodb_client[settings.DB_NAME]
-    # Confirm a connection
     try:
-        mongodb_client.admin.command('ping')
+        app.mongodb_client.admin.command('ping')
         log.debug("Successfully connected to MongoDB!")
     except Exception as e:
         log.debug(e)

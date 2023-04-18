@@ -44,3 +44,14 @@ class JokesService:
     
     async def create_mongo_joke(self, request: Request, joke: JokeBase):
         return await jokes_repo.create_mongo_joke(request, joke)
+    
+    async def update_mongo_joke(
+        self, request: Request, id: str, joke: JokeBase
+    ):
+        return await jokes_repo.update_mongo_joke(request, id, joke)
+
+    async def delete_mongo_joke(
+        self, request: Request, id: str
+    ):
+        return await jokes_repo.delete_mongo_joke(request, id)
+        

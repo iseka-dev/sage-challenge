@@ -110,10 +110,39 @@ async def delete_joke(
 @jokes_routes.post("/mongo", status_code=status.HTTP_200_OK)
 async def create_mongo_joke(request: Request, joke: JokeBase):
     """
-    Stores a joke in the db
+    Stores a joke in the mongo db
     """
     try:
         return await JokesService().create_mongo_joke(request, joke)
+    except Exception as e:
+        log.error(f"Error detail: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={f"Error detail: {e}"}
+        )
+
+
+@jokes_routes.put("/mongo", status_code=status.HTTP_200_OK)
+async def update_mongo_joke(request: Request, id: str, joke: JokeBase):
+    """
+    Updates a joke in the mongo db
+    """
+    try:
+        return await JokesService().update_mongo_joke(request, id, joke)
+    except Exception as e:
+        log.error(f"Error detail: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={f"Error detail: {e}"}
+        )
+
+@jokes_routes.delete("/mongo", status_code=status.HTTP_200_OK)
+async def delete_mongo_joke(request: Request, id: str):
+    """
+    Updates a joke in the mongo db
+    """
+    try:
+        return await JokesService().delete_mongo_joke(request, id)
     except Exception as e:
         log.error(f"Error detail: {e}")
         raise HTTPException(
