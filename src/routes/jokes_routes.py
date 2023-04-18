@@ -58,12 +58,11 @@ async def get_joke_from_source(joke_source: Annotated[
 
 
 @jokes_routes.post("/", status_code=status.HTTP_200_OK)
-async def create_joke(request: Request, joke: JokeBase, db: Session = Depends(get_db)):
+async def create_joke(joke: JokeBase, db: Session = Depends(get_db)):
     """
     Stores a joke in the db
     """
     try:
-        await JokesService().create_mongo_joke(request, joke)
         return await JokesService().create_joke(db, joke)
     except Exception as e:
         log.error(f"Error detail: {e}")
@@ -73,7 +72,7 @@ async def create_joke(request: Request, joke: JokeBase, db: Session = Depends(ge
         )
 
 
-@jokes_routes.put("/jokes/{joke_id}")
+@jokes_routes.put("/{joke_id}")
 async def update_joke(
     joke_id: int, joke: JokeBase, db: Session = Depends(get_db)
 ):
@@ -90,7 +89,7 @@ async def update_joke(
         )
 
 
-@jokes_routes.delete("/jokes/{joke_id}")
+@jokes_routes.delete("/{joke_id}")
 async def delete_joke(
     joke_id: int, db: Session = Depends(get_db)
 ):
