@@ -29,27 +29,31 @@ There are two ways to run the project in order to be able to use this api.
 
 1. It can be done with Uvicorn. Open your console, clone this repo,
    go to the root folder and in the console follow these steps:
-
-  a. Create a virtualenvironment 
+   
+   a. Create a virtualenvironment 
       ``` python3 -m venv env ```
-  b. Install the required packages, listed in requirements.txt
+      
+   b. Install the required packages, listed in requirements.txt
       ``` pip install -r requirements.txt ```
-  c. In the root folder of the project create an .env file with the following constants. First one
-     let the project initialize, while the second connects with the Mongo DB (invited user credentials provided).
+      
+   c. In the root folder of the project create an .env file with the following constants. First one
+      let the project initialize, while the second connects with the Mongo DB (invited user credentials provided).
       
       PROJECT_NAME = "SageMakersChallenge"
       MONGO_URL = "mongodb+srv://invited:pJuCaIBrq7TeqXTL@clusterh.338j7rl.mongodb.net/?retryWrites=true&w=majority"
-
-  d. Run uvicorn in the console with the following command:
+      
+   d. Run uvicorn in the console with the following command:
       ``` uvicorn src.main:app --reload ```
-  e. Now you can go to localhost:8000/docs to see details about the API
-     and interact with the endpoints.
+      
+   e. Now you can go to localhost:8000/docs to see details about the API
+      and interact with the endpoints.
      
      
 2. It is also possible to run the project with Docker.
-
-  a. Download the image from docker hub: ``` docker pull horaciochiarella/sage-challenge:latest ````
-  b. Execute the image with ``` docker run -d --name mycontainer -p 80:80 horaciochiarella/sage-challenge ```
+   
+   a. Download the image from docker hub: ``` docker pull horaciochiarella/sage-challenge:latest ````
+   
+   b. Execute the image with ``` docker run -d --name mycontainer -p 80:80 horaciochiarella/sage-challenge ```
   
 
 ###### What else?
