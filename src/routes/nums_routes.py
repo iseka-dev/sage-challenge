@@ -1,15 +1,8 @@
-from typing import Annotated
-
 from fastapi import APIRouter
-from fastapi import Depends
 from fastapi import HTTPException
-from fastapi import Path
+from fastapi import Query
 from fastapi import status
-from sqlalchemy.orm import Session
 
-from src.dependencies import get_db
-from src.db.schemas import JokeBase
-from src.enums import JokeType
 from src.logger import log
 from src.services.nums_services import NumsService
 
@@ -20,13 +13,31 @@ nums_routes = APIRouter(
 )
 
 
-@nums_routes.get("/", status_code=status.HTTP_200_OK)
-async def get_lower_common_multiple(nums: list(int)):
+@nums_routes.get("/lcm/", status_code=status.HTTP_200_OK)
+async def get_lower_common_multiple(
+    nums: list[int] = Query(...)
+):
     """
-    Get a random joke.
+    Get Lower Common multiple for an array of integers.
     """
     try:
-        return await NumsService().get_lower_common_multiple(nums)
+        log.debug(nums)
+        return NumsService().get_lower_common_multiple(nums)
+    except Exception as e:
+        log.error(f"Error detail: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={f"Error detail: {e}"},
+        )
+
+
+@nums_routes.get("/next/", status_code=status.HTTP_200_OK)
+async def next_number(nums: int = Query(...)):
+    """
+    Get Lower Common multiple for an array of integers.
+    """
+    try:
+        return NumsService().next_mumber(nums)
     except Exception as e:
         log.error(f"Error detail: {e}")
         raise HTTPException(
