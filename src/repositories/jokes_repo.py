@@ -15,8 +15,11 @@ async def get_random_chuck_joke():
 
 
 async def get_random_dad_joke():
-    headers = {"Accept": "application/json"}
-    response = await requests.get(
+    headers = {
+        "Accept": "application/json",
+        "User-Agent": "https://github.com/iseka-dev/sage-makers-challenge"
+    }
+    response = requests.get(
         "https://icanhazdadjoke.com/", headers=headers
     )
     return response.json()["joke"]
