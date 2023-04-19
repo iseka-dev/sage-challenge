@@ -53,16 +53,16 @@ There are two ways to run the project in order to be able to use this api.
 2. It is also possible to run the project with Docker.
    
    a. Download the image from docker hub: 
-         ``` docker pull horaciochiarella/challenge-img-amd64:latest ```
+         ``` docker pull horaciochiarella/challenge-amd64-img:latest ```
 
    or if you are in a Mac with M series processor (arm architecture):
          ``` docker pull horaciochiarella/challenge-arm-img:latest ```
    
    b. Execute the image with 
-         ``` docker run -d --name mycontainer -p 80:80 challenge-img-amd64 ```
+         ``` docker run -d -p 80:80 horaciochiarella/challenge-amd64-img:latest ```
       
       or if you are in a Mac with M series processor (arm architecture):
-         ``` docker run -d -p 80:80 horaciochiarella/sage-challengechallenge-arm-img ```
+         ``` docker run -d -p 80:80 horaciochiarella/challenge-arm-img ```
 
 
 ### What else?
