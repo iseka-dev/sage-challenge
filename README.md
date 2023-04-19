@@ -50,7 +50,10 @@ There are two ways to run the project in order to be able to use this api.
       and interact with the endpoints.
      
      
-2. It is also possible to run the project with Docker.
+2. It is also possible to run the project with Docker. 
+   
+   [If well the version for Mac chip processors the image is working properly,
+   the image for ;inux/amd64 architectures hasn't been tested and could contain errors] 
    
    a. Download the image from docker hub: 
          ``` docker pull horaciochiarella/challenge-amd64-img:latest ```
