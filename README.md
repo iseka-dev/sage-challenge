@@ -55,18 +55,17 @@ There are two ways to run the project in order to be able to use this api.
    [If well the version for Mac chip processors the image is working properly,
    the image for ;inux/amd64 architectures hasn't been tested and could contain errors] 
    
-   a. Download the image from docker hub: 
-         ``` docker pull horaciochiarella/challenge-amd64-img:latest ```
+   a. Download the image from docker hub:
 
-   or if you are in a Mac with M series processor (arm architecture):
-         ``` docker pull horaciochiarella/challenge-arm-img:latest ```
+         for Mac processor (arm): ``` docker pull horaciochiarella/challenge-arm-img:latest ```
+         
+         for linux/amd64: ``` docker pull horaciochiarella/challenge-amd64-img:latest ```
    
-   b. Execute the image with 
-         ``` docker run -d -p 80:80 horaciochiarella/challenge-amd64-img:latest ```
-      
-      or if you are in a Mac with M series processor (arm architecture):
+   b. Run the image with :
+   
          ``` docker run -d -p 80:80 horaciochiarella/challenge-arm-img ```
-
+         or (depending on your image)
+         ``` docker run -d -p 80:80 horaciochiarella/challenge-amd64-img:latest ```
 
 ### What else?
 
